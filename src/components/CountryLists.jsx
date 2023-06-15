@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import CountryCard from './CountryCard';
 import CountrySelector from './CountrySelector';
 import Pagination from './Pagination/Pagination';
 import data from '../../data.json';
@@ -24,21 +25,7 @@ const CountryLists = () => {
   return (
     <main className="w-full h-full px-4 py-6 md:pt-12 md:px-20 dark dark:bg-[#202C36]">
       <CountrySelector countrySearch={updateSearchData} />
-
-      <section className='my-16 grid gap-6 grid-cols-[repeat(auto-fill,_minmax(16.25rem,1fr))] max-w-[1540px] mx-auto'>
-        {currentCountryData.map((country, index) => (
-          <article key={index} className='shadow-md w-full'>
-            <img src={country.flags.png} className='object-fill w-full h-[168px]' />
-            <div className='mt-4 px-6 pb-4'>
-              <h3 className='text-lg font-extrabold mb-4 line-clamp-1'>{country.name}</h3>
-              <p className='font-light pb-3 line-clamp-1'><span className='font-semibold'>Population:</span>{country.population}</p>
-              <p className='font-light pb-3 line-clamp-1'><span className='font-semibold'>Region:</span> {country.region}</p>
-              <p className='font-light line-clamp-1'><span className='font-semibold'>Capital:</span> {country.capital}</p>
-            </div>
-          </article>
-        ))}
-      </section>
-      {/* when button moved to other page and search result will be blank */}
+      <CountryCard displayCountries={currentCountryData} />
       <Pagination
         className="pagination-bar"
         currentPage={currentPage}
