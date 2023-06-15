@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 import classnames from 'classnames';
-import { usePagination, DOTS } from '../../usePagination'
-import './pagination.scss'
+import { usePagination, DOTS } from './usePagination';
+import '../../../public/styles/pagination.scss';
 
-// eslint-disable-next-line react/prop-types
 const Pagination = ({ totalCount, currentPage, pageSize, onPageChange, siblingCount, className }) => {
   const paginationRange = usePagination({
     currentPage,
@@ -39,17 +39,16 @@ const Pagination = ({ totalCount, currentPage, pageSize, onPageChange, siblingCo
       >
         <div className="arrow left" />
       </li>
-      {paginationRange.map((pageNumber, i) => {
+      {paginationRange.map((pageNumber, idx) => {
 
         // If the pageItem is a DOT, render the DOTS unicode character
         if (pageNumber === DOTS) {
-          return <li key={i} className="pagination-item dots">&#8230;</li>;
+          return <li key={idx} className="pagination-item dots">&#8230;</li>;
         }
 
         // Render our Page Pills
         return (
-          // eslint-disable-next-line react/jsx-key
-          <li
+          <li key={idx}
             className={classnames('pagination-item', {
               selected: pageNumber === currentPage
             })}
