@@ -9,6 +9,7 @@ let PageSize = 10;
 const CountryLists = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [countriesData, setCountriesData] = useState([...data]);
+  const [filteredSearchCountry, setFilteredSearchCountry] = useState([]);
   const [searchField, setSearchField] = useState('');
 
   const updateData = (newData, methodFilter) => {
@@ -23,7 +24,6 @@ const CountryLists = () => {
         }
       } else {
         const resultRegion = data.filter(country => country.region.toLowerCase() === newData);
-        console.log(searchField, 'START');
         if (searchField) {
           const result = resultRegion.filter(country => country.name.toLowerCase().match(searchField.toLowerCase()));
           setCountriesData(result);
@@ -37,7 +37,7 @@ const CountryLists = () => {
     if (methodFilter === 'search') {
       setSearchField(newData);
       const result = countriesData.filter(country => country.name.toLowerCase().match(newData.toLowerCase()));
-      setCountriesData(result);
+      setFilteredSearchCountry(result);
       setCurrentPage(1);
     }
   }
@@ -57,9 +57,13 @@ const CountryLists = () => {
   const currentCountryDisplay = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
+    if (filteredSearchCountry.length) {
+      return filteredSearchCountry.slice(firstPageIndex, lastPageIndex);
+    } else {
+      return countriesData.slice(firstPageIndex, lastPageIndex);
+    }
 
-    return countriesData.slice(firstPageIndex, lastPageIndex);
-  }, [countriesData, currentPage]);
+  }, [countriesData, currentPage, filteredSearchCountry]);
 
   return (
     <main className="w-full h-full px-4 py-6 md:pt-12 md:px-20 dark dark:bg-[#202C36]">
