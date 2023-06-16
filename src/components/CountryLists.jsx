@@ -9,23 +9,62 @@ let PageSize = 10;
 const CountryLists = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [countriesData, setCountriesData] = useState([...data]);
+  const [searchField, setSearchField] = useState('');
 
-  const updateSearchData = (newData) => {
-    const result = data.filter(country => country.name.toLowerCase().match(newData.toLowerCase()));
-    setCountriesData(result);
-    setCurrentPage(1);
+  const updateData = (newData, methodFilter) => {
+    if (methodFilter === 'region') {
+      if (!newData) { // empty string
+        setCountriesData([...data]);
+        setCurrentPage(1);
+        if (searchField) {
+          const result = data.filter(country => country.name.toLowerCase().match(searchField.toLowerCase()));
+          setCountriesData(result);
+          return setCurrentPage(1);
+        }
+      } else {
+        const resultRegion = data.filter(country => country.region.toLowerCase() === newData);
+        console.log(searchField, 'START');
+        if (searchField) {
+          const result = resultRegion.filter(country => country.name.toLowerCase().match(searchField.toLowerCase()));
+          setCountriesData(result);
+          return setCurrentPage(1);
+        }
+        setCountriesData(resultRegion);
+        setCurrentPage(1);
+      }
+    }
+
+    if (methodFilter === 'search') {
+      setSearchField(newData);
+      const result = countriesData.filter(country => country.name.toLowerCase().match(newData.toLowerCase()));
+      setCountriesData(result);
+      setCurrentPage(1);
+    }
   }
 
-  const currentCountryData = useMemo(() => {
+  // const updateSearchData = (newData) => {
+  //   const result = countriesData.filter(country => country.name.toLowerCase().match(newData.toLowerCase()));
+  //   setCountriesData(result);
+  //   setCurrentPage(1);
+  // }
+
+  // const handlefilteredCountry = (filteredCountry) => {
+  //     const result = data.filter(country => country.region.toLowerCase() === filteredCountry)
+  //     setCountriesData(result);
+  //     setCurrentPage(1);
+  // }
+
+  const currentCountryDisplay = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
+
     return countriesData.slice(firstPageIndex, lastPageIndex);
   }, [countriesData, currentPage]);
 
   return (
     <main className="w-full h-full px-4 py-6 md:pt-12 md:px-20 dark dark:bg-[#202C36]">
-      <CountrySelector countrySearch={updateSearchData} />
-      <CountryCard displayCountries={currentCountryData} />
+      <CountrySelector updateData={updateData} />
+      <CountryCard displayCountries={currentCountryDisplay} />
       <Pagination
         className="pagination-bar"
         currentPage={currentPage}

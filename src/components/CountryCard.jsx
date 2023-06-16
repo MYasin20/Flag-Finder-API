@@ -8,9 +8,9 @@ const CountryCard = ({ displayCountries }) => {
           <img src={country.flags.png} className='object-fill w-full h-[168px]' />
           <div className='mt-4 px-6 pb-4'>
             <h3 className='text-lg font-extrabold mb-4 line-clamp-1'>{country.name}</h3>
-            <p className='font-light pb-3 line-clamp-1'><span className='font-semibold'>Population:</span>{country.population}</p>
-            <p className='font-light pb-3 line-clamp-1'><span className='font-semibold'>Region:</span> {country.region}</p>
-            <p className='font-light line-clamp-1'><span className='font-semibold'>Capital:</span> {country.capital}</p>
+            <p className='font-light pb-3 line-clamp-1'><span className='font-semibold'>Population: </span>{country.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
+            <p className='font-light pb-3 line-clamp-1'><span className='font-semibold'>Region: </span> {country.region}</p>
+            <p className='font-light line-clamp-1'><span className='font-semibold'>Capital: </span> {country.capital}</p>
           </div>
         </article>
       ))}

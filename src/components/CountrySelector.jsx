@@ -2,11 +2,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
-const CountrySelector = ({ countrySearch }) => {
+const CountrySelector = ({ updateData }) => {
 
   const handleNewSearch = (event) => {
     const value = event.target.value;
-    countrySearch(value);
+    return updateData(value, 'search');
+  }
+  const handleFilterRegion = (event) => {
+    let value = event.target.value.toLowerCase();
+    if (value === 'america') {
+      value = 'americas';
+    }
+    return updateData(value, 'region');
   }
 
   return (
@@ -22,15 +29,15 @@ const CountrySelector = ({ countrySearch }) => {
         />
       </div>
 
-      <select
+      <select onChange={handleFilterRegion}
         className="rounded-md text-sm md:text-base p-4 min-w-[200px] outline-none shadow-md"
-        name="filter-by-region">
+        name="region">
         <option value="">Filter By Region</option>
         <option value="Africa">Africa</option>
         <option value="America">America</option>
         <option value="Asia">Asia</option>
         <option value="Europe">Europe</option>
-        <option value="Ocenia">Ocenia</option>
+        <option value="Oceania">Oceania</option>
       </select>
     </div>
   )
