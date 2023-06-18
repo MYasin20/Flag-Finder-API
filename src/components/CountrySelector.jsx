@@ -2,18 +2,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
-const CountrySelector = ({ updateData }) => {
+const CountrySelector = ({ search, region }) => {
 
   const handleNewSearch = (event) => {
-    const value = event.target.value;
-    return updateData(value, 'search');
+    const value = event.target.value.toLowerCase();
+    search(value);
   }
   const handleFilterRegion = (event) => {
     let value = event.target.value.toLowerCase();
     if (value === 'america') {
       value = 'americas';
     }
-    return updateData(value, 'region');
+    region(value);
   }
 
   return (
@@ -25,7 +25,7 @@ const CountrySelector = ({ updateData }) => {
           onInput={handleNewSearch}
           type="text"
           id="searchFlag"
-          placeholder="Search"
+          placeholder="Search a country...."
         />
       </div>
 
