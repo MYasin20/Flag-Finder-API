@@ -40,6 +40,8 @@ Users should be able to:
 
 ## My process
 
+Building an API using React using UseEffect and TailwindCSS to be familiar of the framework and adapting a pagination for large arrays of data that will be rendered (minimized the display data per page)
+
 ### Built with
 
 - Semantic HTML5 markup
@@ -47,18 +49,23 @@ Users should be able to:
 - CSS Grid
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
-- [Vite](https://vitejs.dev/) - React framework
+- [Vite](https://vitejs.dev/) - React Framework
 - [TailwindCSS](https://tailwindcss.com/) - For styles
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
-
-To see how you can add code snippets, see below:
+line-clamp -
+implementing pagination from other source
+custom hook
+useMemo hook
 
 ### Continued development
 
 Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+
+### Useful Resources
+
+- Pagination using React > https://www.freecodecamp.org/news/build-a-custom-pagination-component-in-react/
 
 ## Author
 

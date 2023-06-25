@@ -13,10 +13,11 @@ const CountryLists = () => {
   const [searchField, setSearchField] = useState('');
   const [isRegionSelected, setRegionSelected] = useState(false);
 
+
   const handleSearchData = (searchData) => {
     setSearchField(searchData);
     setCurrentPage(1);
-    if (!isRegionSelected) { // no region was select
+    if (!isRegionSelected) {
       const result = data.filter(country => country.name.toLowerCase().match(searchData, 'gi'));
       setDisplayCountries(result);
     } else if (isRegionSelected) {
@@ -27,7 +28,7 @@ const CountryLists = () => {
 
   const handleRegionData = (regionData) => {
     let result;
-    if (regionData) { // if there is value
+    if (regionData) {
       setRegionSelected(true);
       result = data.filter(country => country.region.toLowerCase() === regionData);
     } else {
@@ -40,18 +41,6 @@ const CountryLists = () => {
     if (searchField) {
       const newResult = result.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
       setDisplayCountries(newResult);
-      // if (temporaryStorageData === result) {
-      //   console.log(temporaryStorageData, '--- there is data');
-      //   const newResult = temporaryStorageData.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
-      //   setDisplayCountriesData(newResult);
-      // } else if (temporaryStorageData) {
-      //   const newResult = result.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
-      //   setDisplayCountriesData(newResult);
-      // } else if (!temporaryStorageData) {
-      //   console.log(temporaryStorageData, '--- there is no data');
-      //   const newResult = result.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
-      //   setDisplayCountriesData(newResult);
-      // }
     } else {
       setDisplayCountries(result);
     }
