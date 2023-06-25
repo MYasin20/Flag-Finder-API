@@ -8,8 +8,8 @@ let PageSize = 10;
 
 const CountryLists = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [displayCountriesData, setDisplayCountriesData] = useState([...data]);
-  const [temporaryStorageData, setTemporaryStorageData] = useState([]);
+  const [displayCountries, setDisplayCountries] = useState([...data]);
+  const [regionSelectedCountries, setRegionSelectedCountries] = useState([]);
   const [searchField, setSearchField] = useState('');
   const [isRegionSelected, setRegionSelected] = useState(false);
 
@@ -18,39 +18,42 @@ const CountryLists = () => {
     setCurrentPage(1);
     if (!isRegionSelected) { // no region was select
       const result = data.filter(country => country.name.toLowerCase().match(searchData, 'gi'));
-      setDisplayCountriesData(result);
+      setDisplayCountries(result);
     } else if (isRegionSelected) {
-      const result = temporaryStorageData.filter(country => country.name.toLowerCase().match(searchData, 'gi'));
-      setDisplayCountriesData(result);
+      const result = regionSelectedCountries.filter(country => country.name.toLowerCase().match(searchData, 'gi'));
+      setDisplayCountries(result);
     }
   }
 
   const handleRegionData = (regionData) => {
-    const result = data.filter(country => country.region.toLowerCase() === regionData);
-    setTemporaryStorageData(result);
-    regionData ? setRegionSelected(true) : setRegionSelected(false);
+    let result;
+    if (regionData) { // if there is value
+      setRegionSelected(true);
+      result = data.filter(country => country.region.toLowerCase() === regionData);
+    } else {
+      setRegionSelected(false);
+      result = [...data];
+    }
+    setRegionSelectedCountries(result);
     setCurrentPage(1);
 
-    if (result.length > 0 && searchField) { // result.length means that there is valid data to be displayed along with the searchField
-      if (temporaryStorageData === result) {
-        console.log(temporaryStorageData, '--- there is data');
-        const newResult = temporaryStorageData.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
-        setDisplayCountriesData(newResult);
-      } else if (temporaryStorageData) {
-        const newResult = result.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
-        setDisplayCountriesData(newResult);
-      } else if (!temporaryStorageData) {
-        console.log(temporaryStorageData, '--- there is no data');
-        const newResult = result.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
-        setDisplayCountriesData(newResult);
-      }
+    if (searchField) {
+      const newResult = result.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
+      setDisplayCountries(newResult);
+      // if (temporaryStorageData === result) {
+      //   console.log(temporaryStorageData, '--- there is data');
+      //   const newResult = temporaryStorageData.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
+      //   setDisplayCountriesData(newResult);
+      // } else if (temporaryStorageData) {
+      //   const newResult = result.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
+      //   setDisplayCountriesData(newResult);
+      // } else if (!temporaryStorageData) {
+      //   console.log(temporaryStorageData, '--- there is no data');
+      //   const newResult = result.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
+      //   setDisplayCountriesData(newResult);
+      // }
     } else {
-      if (regionData && !searchField) {
-        setDisplayCountriesData(result);
-      } else if (!regionData && searchField) {
-        const newResult = data.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
-        setDisplayCountriesData(newResult);
-      }
+      setDisplayCountries(result);
     }
   }
 
@@ -58,17 +61,17 @@ const CountryLists = () => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
 
-    return displayCountriesData.slice(firstPageIndex, lastPageIndex);
-  }, [displayCountriesData, currentPage]);
+    return displayCountries.slice(firstPageIndex, lastPageIndex);
+  }, [displayCountries, currentPage]);
 
   return (
-    <main className="w-full h-full px-4 py-6 md:pt-12 md:px-20 dark dark:bg-[#202C36]">
+    <main className="w-full h-full px-4 py-6 md:pt-12 md:px-20 dark dark:bg-[#202C36] bg-[#fafafa]">
       <CountrySelector search={handleSearchData} region={handleRegionData} />
       <CountryCard displayCountries={currentCountryDisplay} />
       <Pagination
         className="pagination-bar"
         currentPage={currentPage}
-        totalCount={displayCountriesData.length}
+        totalCount={displayCountries.length}
         pageSize={PageSize}
         onPageChange={page => setCurrentPage(page)}
       />

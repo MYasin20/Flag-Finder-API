@@ -15,7 +15,7 @@ const CountrySelector = ({ search, region }) => {
     }
     region(value);
   }
-
+  // dark:bg-[#2b3945] dark:text-white 
   return (
     <div className="md:flex md:w-full justify-between max-w-[1540px] mx-auto">
       <div className='flex items-center mb-10 md:mb-0 md:w-[480px]'>
