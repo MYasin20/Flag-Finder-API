@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useMemo } from 'react';
 import CountryCard from './CountryCard';
 import CountrySelector from './CountrySelector';
@@ -6,7 +7,7 @@ import data from '../../data.json';
 
 let PageSize = 10;
 
-const CountryLists = () => {
+const CountryLists = ({ setDarkMode }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [displayCountries, setDisplayCountries] = useState([...data]);
   const [regionSelectedCountries, setRegionSelectedCountries] = useState([]);
@@ -55,9 +56,10 @@ const CountryLists = () => {
 
   return (
     <main className="w-full h-full px-4 py-6 md:pt-12 md:px-20 dark dark:bg-[#202C36] bg-[#fafafa]">
-      <CountrySelector search={handleSearchData} region={handleRegionData} />
-      <CountryCard displayCountries={currentCountryDisplay} />
+      <CountrySelector search={handleSearchData} region={handleRegionData} setDarkMode={setDarkMode} />
+      <CountryCard displayCountries={currentCountryDisplay} setDarkMode={setDarkMode} />
       <Pagination
+        setDarkMode={setDarkMode}
         className="pagination-bar"
         currentPage={currentPage}
         totalCount={displayCountries.length}

@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom"
 
-// dark:bg-[#2b3945] dark:text-white 
-
-const CountryCard = ({ displayCountries }) => {
+const CountryCard = ({ displayCountries, setDarkMode }) => {
   return (
     <section className='my-16 grid gap-6 grid-cols-[repeat(auto-fill,_minmax(16.25rem,1fr))] max-w-[1540px] mx-auto'>
       {displayCountries.map((country, index) => (
-        <Link to={`/${country.name}`} key={index} className='shadow-sm w-full hover:shadow-lg'>
+        <Link to={`/${country.name}`} key={index} className={`${setDarkMode ? 'dark:bg-[#2b3945] dark:text-white ' : ''} shadow-sm w-full hover:shadow-lg`}>
           <img src={country.flags.png} className='object-fill w-full h-[168px]' />
           <div className='mt-4 px-6 pb-4'>
             <h3 className='text-lg font-extrabold mb-4 line-clamp-1'>{country.name}</h3>

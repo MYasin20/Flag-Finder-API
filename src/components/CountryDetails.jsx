@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { Link, useParams } from 'react-router-dom';
-import { ReactComponent as ArrowLeft } from '../assets/svgs/arrow-back-outline.svg';
 import data from '../../data.json';
 
 const CountryDetails = () => {
@@ -10,7 +9,7 @@ const CountryDetails = () => {
     <section className='dark:bg-[#202c37] px-7 pt-14 md:pt-20 md:px-20 h-full min-h-screen bg-[#fafafa] md:bg-[#f3f3f3]'>
       <div className='max-w-[1540px] mx-auto'>
         <Link to="/" className='dark:bg-[#2b3945] dark:text-white w-[110px] max-w-40 h-9 shadow-md md:shadow-none md:hover:shadow-md bg-white flex items-center justify-center gap-4 rounded'>
-          <ArrowLeft />
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="48" d="M244 400L100 256l144-144M120 256h292" /></svg>
           Back
         </Link>
         <div className='grid grid-cols-1 h-[400px] gap-6 lg:gap-4 sm:grid-cols-2 max-[320px]:items-center min-[425px]:place-items-center w-full max-w-[1040px] mx-auto mt-16'>
