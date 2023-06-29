@@ -11,10 +11,8 @@ This is a solution to the [REST Countries API with color theme switcher challeng
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -27,20 +25,21 @@ Users should be able to:
 - Filter countries by region
 - Click on a country to see more detailed information on a separate page
 - Click through to the border countries on the detail page
-- Toggle the color scheme between light and dark mode _(optional)_
+- Toggle the color scheme between light and dark mode
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./flag-SS.png)
+![](./flag-darkmode-SS.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Source Code](https://github.com/MYasin20/Flag-Finder-API)
+- Live Site URL: [Live Preview](https://myasin20.github.io/Flag-Finder-API/)
 
 ## My process
 
-Building an API using React using UseEffect and TailwindCSS to be familiar of the framework and adapting a pagination for large arrays of data that will be rendered (minimized the display data per page)
+Building an API using React using TailwindCSS and to be familiar of the framework and adapting a pagination for large arrays of data that will be rendered (minimized the display data per page)
 
 ### Built with
 
@@ -54,18 +53,15 @@ Building an API using React using UseEffect and TailwindCSS to be familiar of th
 
 ### What I learned
 
-line-clamp -
+line-clamp
 implementing pagination from other source
 custom hook
 useMemo hook
 
-### Continued development
-
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
 ### Useful Resources
 
 - Pagination using React > https://www.freecodecamp.org/news/build-a-custom-pagination-component-in-react/
+- Classnames > https://www.npmjs.com/package/classnames
 
 ## Author
 
