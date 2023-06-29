@@ -28,7 +28,7 @@ const CountrySelector = ({ search, region, setDarkMode }) => {
       </div>
 
       <select onChange={handleFilterRegion}
-        className={`${setDarkMode ? 'dark:bg-[#2b3945] dark:text-[#fafafa]' : ''} rounded-md text-sm md:text-base p-4 min-w-[200px] outline-none shadow-md`}
+        className={`${setDarkMode ? 'dark:bg-[#2b3945] dark:text-[#fafafa]' : ''} bg-white rounded-md text-sm md:text-base p-4 min-w-[200px] outline-none shadow-md`}
         name="region">
         <option value="">Filter By Region</option>
         <option value="Africa">Africa</option>

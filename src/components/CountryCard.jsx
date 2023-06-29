@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const CountryCard = ({ displayCountries, setDarkMode }) => {
   return (
-    <section className='mt-16 grid gap-6 grid-cols-[repeat(auto-fill,_minmax(16.25rem,1fr))] h-[770px] max-w-[1540px] mx-auto'>
+    <section className='my-16 grid gap-6 grid-cols-[repeat(auto-fill,_minmax(16.25rem,1fr))] max-w-[1540px] mx-auto'>
       {displayCountries.map((country, index) => (
         <Link to={`/${country.name}`} key={index} className={`${setDarkMode ? 'dark:bg-[#2b3945] dark:text-white ' : ''} shadow-sm w-full h-[350px] hover:shadow-lg`}>
           <img src={country.flags.png} className='object-fill w-full h-[168px]' />
