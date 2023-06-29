@@ -35,7 +35,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Source Code](https://github.com/MYasin20/Flag-Finder-API)
-- Live Site URL: [Live Preview](https://myasin20.github.io/Flag-Finder-API/)
+- Live Site URL: [Live Preview](https://thunderous-stroopwafel-1bfd1b.netlify.app/)
 
 ## My process
 
