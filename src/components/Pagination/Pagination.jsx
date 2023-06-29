@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { usePagination, DOTS } from './usePagination';
 import '../../../public/styles/pagination.scss';
 
-const Pagination = ({ totalCount, currentPage, pageSize, onPageChange, siblingCount, className }) => {
+const Pagination = ({ totalCount, currentPage, pageSize, onPageChange, siblingCount, className, setDarkMode }) => {
   const paginationRange = usePagination({
     currentPage,
     totalCount,
@@ -37,20 +37,25 @@ const Pagination = ({ totalCount, currentPage, pageSize, onPageChange, siblingCo
         })}
         onClick={onPrevious}
       >
-        <div className="arrow left" />
+        <div className={`${setDarkMode ? 'arrow-light' : 'arrow-dark'} left`} />
       </li>
       {paginationRange.map((pageNumber, idx) => {
 
         // If the pageItem is a DOT, render the DOTS unicode character
         if (pageNumber === DOTS) {
-          return <li key={idx} className="pagination-item dots">&#8230;</li>;
+          return <li key={idx} className={`pagination-item dots ${setDarkMode ? 'text-white' : ''}`}>&#8230;</li>;
         }
 
         // Render our Page Pills
         return (
           <li key={idx}
             className={classnames('pagination-item', {
-              selected: pageNumber === currentPage
+              selected: pageNumber === currentPage && !setDarkMode,
+              'bg-[#0000000a]': pageNumber === currentPage && !setDarkMode,
+              'bg-[#495b68]': pageNumber === currentPage && setDarkMode,
+              'hover:bg-[#5d6d7a]': pageNumber === currentPage && setDarkMode,
+              'text-white': setDarkMode
+
             })}
             onClick={() => onPageChange(pageNumber)}
           >
@@ -65,7 +70,7 @@ const Pagination = ({ totalCount, currentPage, pageSize, onPageChange, siblingCo
         })}
         onClick={onNext}
       >
-        <div className="arrow right" />
+        <div className={`${setDarkMode ? 'arrow-light' : 'arrow-dark'} right`} />
       </li>
     </ul>
   )

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useMemo } from 'react';
 import CountryCard from './CountryCard';
 import CountrySelector from './CountrySelector';
@@ -6,17 +7,18 @@ import data from '../../data.json';
 
 let PageSize = 10;
 
-const CountryLists = () => {
+const CountryLists = ({ setDarkMode }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [displayCountries, setDisplayCountries] = useState([...data]);
   const [regionSelectedCountries, setRegionSelectedCountries] = useState([]);
   const [searchField, setSearchField] = useState('');
   const [isRegionSelected, setRegionSelected] = useState(false);
 
+
   const handleSearchData = (searchData) => {
     setSearchField(searchData);
     setCurrentPage(1);
-    if (!isRegionSelected) { // no region was select
+    if (!isRegionSelected) {
       const result = data.filter(country => country.name.toLowerCase().match(searchData, 'gi'));
       setDisplayCountries(result);
     } else if (isRegionSelected) {
@@ -27,7 +29,7 @@ const CountryLists = () => {
 
   const handleRegionData = (regionData) => {
     let result;
-    if (regionData) { // if there is value
+    if (regionData) {
       setRegionSelected(true);
       result = data.filter(country => country.region.toLowerCase() === regionData);
     } else {
@@ -40,18 +42,6 @@ const CountryLists = () => {
     if (searchField) {
       const newResult = result.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
       setDisplayCountries(newResult);
-      // if (temporaryStorageData === result) {
-      //   console.log(temporaryStorageData, '--- there is data');
-      //   const newResult = temporaryStorageData.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
-      //   setDisplayCountriesData(newResult);
-      // } else if (temporaryStorageData) {
-      //   const newResult = result.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
-      //   setDisplayCountriesData(newResult);
-      // } else if (!temporaryStorageData) {
-      //   console.log(temporaryStorageData, '--- there is no data');
-      //   const newResult = result.filter(country => country.name.toLowerCase().match(searchField, 'gi'));
-      //   setDisplayCountriesData(newResult);
-      // }
     } else {
       setDisplayCountries(result);
     }
@@ -65,10 +55,11 @@ const CountryLists = () => {
   }, [displayCountries, currentPage]);
 
   return (
-    <main className="w-full h-full px-4 py-6 md:pt-12 md:px-20 dark dark:bg-[#202C36] bg-[#fafafa]">
-      <CountrySelector search={handleSearchData} region={handleRegionData} />
-      <CountryCard displayCountries={currentCountryDisplay} />
+    <main className="w-full min-h-screen h-full px-4 py-6 md:pt-12 md:px-20 dark dark:bg-[#202C36] bg-[#fafafa]">
+      <CountrySelector search={handleSearchData} region={handleRegionData} setDarkMode={setDarkMode} />
+      <CountryCard displayCountries={currentCountryDisplay} setDarkMode={setDarkMode} />
       <Pagination
+        setDarkMode={setDarkMode}
         className="pagination-bar"
         currentPage={currentPage}
         totalCount={displayCountries.length}
