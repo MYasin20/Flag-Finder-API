@@ -55,7 +55,7 @@ const CountryLists = ({ setDarkMode }) => {
   }, [displayCountries, currentPage]);
 
   return (
-    <main className="w-full h-full px-4 py-6 md:pt-12 md:px-20 dark dark:bg-[#202C36] bg-[#fafafa]">
+    <main className="w-full min-h-screen h-full px-4 py-6 md:pt-12 md:px-20 dark dark:bg-[#202C36] bg-[#fafafa]">
       <CountrySelector search={handleSearchData} region={handleRegionData} setDarkMode={setDarkMode} />
       <CountryCard displayCountries={currentCountryDisplay} setDarkMode={setDarkMode} />
       <Pagination
